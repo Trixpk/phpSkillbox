@@ -1,0 +1,15 @@
+php_value display_errors 1
+php_value display_startup_errors 1
+php_value error_reporting E_ALL
+# Время жизни сессии
+php_value session.gc_maxlifetime 1200
+# Удалять все истекшие сессионные файлы со 100% вероятностью при каждом хите
+php_value session.gc_probability 100
+# Переименовываем сессионную куку
+php_value session.name session_id
+# Устанавливаем время жизни сессионной куки
+php_value session.cookie_lifetime 1200
+
+RewriteEngine on
+RewriteRule ^route/([-a-zA-Z0-9_]+)/$ route/index.php [L]
+
