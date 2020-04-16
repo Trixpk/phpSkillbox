@@ -1,31 +1,34 @@
 <?php
-session_start();
-require_once $_SERVER['DOCUMENT_ROOT'] . "/include/config.php";
+    session_start();
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/include/config.php";
 // Нажата ли кнопка авторизационной формы
-if (isset($_POST['btn'])) {
-    $userLogin = $_POST['login'];
-    $userPassword = $_POST['password'];
-    $pass_hash = md5($userPassword);
+    if (isset($_POST['btn']))
+    {
+        $userLogin = $_POST['login'];
+        $userPassword = $_POST['password'];
+        $pass_hash = md5($userPassword);
 
-    $result = mysqli_query($connect, "select * from users where login = '$userLogin' and password = '$pass_hash'");
-    while($row = mysqli_fetch_assoc($result)) {
-        echo "<pre>";
+        $result = mysqli_query($connect, "select * from users where login = '$userLogin' and password = '$pass_hash'");
+        while ($row = mysqli_fetch_assoc($result))
+        {
+            echo "<pre>";
             var_export($row);
-        echo "</pre>";
-    }
+            echo "</pre>";
+        }
 
-    // Если результат поиска логина не равен false и пароль пользователя равен
-    // паролю найденному в массиве с паролями по ключу полученному в $searchLogin
-    /*if ($searchLogin !== false && $userPassword === $arrPasswords[$searchLogin]) {
-        $_SESSION['user'] = $arrLogins[$searchLogin];
-        setcookie("login", $arrLogins[$searchLogin], time() + 60 * 60 * 24 * 30, "/");
-    } else {
-        $autorize_err = true;
-    }*/
-}
-if (isset($_POST['exit-btn'])) {
-    userLogout();
-}
+        // Если результат поиска логина не равен false и пароль пользователя равен
+        // паролю найденному в массиве с паролями по ключу полученному в $searchLogin
+        /*if ($searchLogin !== false && $userPassword === $arrPasswords[$searchLogin]) {
+            $_SESSION['user'] = $arrLogins[$searchLogin];
+            setcookie("login", $arrLogins[$searchLogin], time() + 60 * 60 * 24 * 30, "/");
+        } else {
+            $autorize_err = true;
+        }*/
+    }
+    if (isset($_POST['exit-btn']))
+    {
+        userLogout();
+    }
 ?>
 <? require_once "include/header.php" ?>
 <? if (isset($_GET['login']) && $_GET['login'] == "yes"): ?>
@@ -49,15 +52,15 @@ if (isset($_POST['exit-btn'])) {
                 <div class="index-auth">
                     <form action="/?login=yes" method="POST">
                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                            <?if(!isset($_COOKIE['login'])) {?>
-                            <tr>
-                                <td class="iat">Введите логин: <br/> <input id="login_id" size="30" name="login"
-                                                                            value="<?= (isset($userLogin)) ? $userLogin : "" ?>"/>
-                                </td>
-                            </tr>
-                            <?}else {?>
-                                <input type="hidden" name="login" value="<?=$_COOKIE['login']?>">
-                            <?}?>
+                            <? if (!isset($_COOKIE['login'])) { ?>
+                                <tr>
+                                    <td class="iat">Введите логин: <br/> <input id="login_id" size="30" name="login"
+                                                                                value="<?= (isset($userLogin)) ? $userLogin : "" ?>"/>
+                                    </td>
+                                </tr>
+                            <? } else { ?>
+                                <input type="hidden" name="login" value="<?= $_COOKIE['login'] ?>">
+                            <? } ?>
                             <tr>
                                 <td class="iat">Ваш пароль: <br/> <input id="password_id" size="30" name="password"
                                                                          type="password"
@@ -74,11 +77,13 @@ if (isset($_POST['exit-btn'])) {
                         </table>
                     </form>
                     <?
-                    if (isset($_SESSION['user'])) {
-                        require_once "include/success.php";
-                    } elseif (isset($autorize_err)) {
-                        require_once "include/autorize_err.php";
-                    }
+                        if (isset($_SESSION['user']))
+                        {
+                            require_once "include/success.php";
+                        } else if (isset($autorize_err))
+                        {
+                            require_once "include/autorize_err.php";
+                        }
                     ?>
                 </div>
 

@@ -1,6 +1,6 @@
 <?php
 $host = "localhost"; // адрес сервера БД
-$login = "trixpk"; // Логин к БД
+$login = "trix"; // Логин к БД
 $password = "trix40021"; // Пароль к БД
 $dbName = "phpskillbox"; // Имя базы данных
 
