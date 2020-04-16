@@ -19,7 +19,7 @@
     `phone` varchar(11) not null,
     primary key (`id`)
 )';*/
-
+// test
     //$query = 'drop table if exists `test`';
 
     //$query = 'alter table `test` modify `email` varchar(60) not null ';
